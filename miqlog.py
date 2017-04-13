@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from tailer import SSHTailer
+from termcolor import colored
 from time import sleep
 username = 'root'
 password = ''
@@ -14,9 +15,9 @@ def get_log(server_parameter, log_level='INFO', path='NONE'):
                 if log_level == 'ALL':
                     print line
                 elif 'INFO' in line and 'INFO' in log_level:
-                    print line
+                    print colored(line, 'green')
                 elif 'ERROR' in line and 'ERROR' in log_level:
-                    print line
+                    print colored(line, 'red')
             sleep(0.2)
     except:
         tailer.disconnect()
