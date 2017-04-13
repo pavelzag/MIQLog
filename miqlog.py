@@ -24,16 +24,22 @@ def get_log(server_parameter, log_level='INFO', path='NONE'):
 
 def log_typer(log_type_abbr):
     if log_type_abbr == 'evm':
+        print('The log type that was selected is: ' + log_type_abbr)
         return log_type_abbr
     elif log_type_abbr == 'aut':
+        print('The log type that was selected is: \'automation.log\'')
         return 'automation'
     elif log_type_abbr == 'pol':
+        print('The log type that was selected is: \'policy.log\'')
         return 'policy'
     elif log_type_abbr == 'api':
+        print('The log type that was selected is: \'api.log\'')
         return log_type_abbr
     elif log_type_abbr == 'prod':
+        print('The log type that was selected is: \'production.log\'')
         return 'production'
     else:
+        print('The log type that was selected is: \'evm.log\'')
         return 'evm'
 
 
