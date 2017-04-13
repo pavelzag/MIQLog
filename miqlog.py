@@ -3,7 +3,7 @@
 from tailer import SSHTailer
 from time import sleep
 username = 'root'
-password = 'd'
+password = ''
 
 
 def get_log(server_parameter, log_level='INFO', path='NONE'):
