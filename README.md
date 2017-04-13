@@ -4,7 +4,7 @@ Gain easy access to Manage IQ Logs
 This is a simple script that allows simple access to different ManageIQ logs.
 
 # Setting up:
-Before running change to your machines' usernames and the passwords.
+Before running change to your machines' usernames and the passwords if required.
 
 # Running:
 The prompt will ask you the following:
