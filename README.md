@@ -13,8 +13,11 @@ Enter your CFME address: <Your MIQ Appliance>
 
 Select log level (all, info, error): <all is selected by default>
 
-Select log (evm = 'evm', aut = 'automation', pol = 'policy', api = 'api', prod = 'production'): <evm.log is selected by default>
+Select log (evm = 'evm', aut = 'automation', pol = 'policy', api = 'api', prod = 'production'):
+ 
+ <evm.log is selected by default>
 
+After exiting the app, a log file is saved with all the output that was monitored
 
 The script uses slightly modified fork of this app:
 https://github.com/praekelt/python-sshtail
