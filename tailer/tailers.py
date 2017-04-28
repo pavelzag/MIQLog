@@ -4,7 +4,6 @@
 # thane@praekelt.com
 #
 
-import os
 import time
 import paramiko
 

@@ -1,25 +1,30 @@
 #!/usr/bin/env python
 
+import random
+import string
 from tailer import SSHTailer
 from termcolor import colored
 from time import sleep
 username = 'root'
 password = ''
+random_string = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(4))
 
 
-def get_log(server_parameter, log_level='INFO', path='NONE'):
+def get_log(server_parameter, log_level='INFO', path='NONE', log_type='None'):
+    logfile = open(log_type + "__" + 'log' + "__" + random_string + '.txt', 'w')
     tailer = SSHTailer(server_parameter, path, verbose=True)
     try:
         while 1:
             for line in tailer.tail():
                 if log_level == 'ALL':
-                    print line
+                    print(line)
                 elif 'INFO' in line and 'INFO' in log_level:
-                    print colored(line, 'green')
+                    print (colored(line, 'green'))
                 elif 'ERROR' in line and 'ERROR' in log_level:
-                    print colored(line, 'red')
+                    print (colored(line, 'red'))
+                logfile.write("%s\n" % line)
             sleep(0.2)
-    except:
+    except KeyboardInterrupt:
         tailer.disconnect()
 
 
@@ -55,4 +60,4 @@ if __name__ == "__main__":
     log_type = log_typer(log_type_abbr)
     server_call = username + '@' + server_address
     path = '/var/www/miq/vmdb/log/' + log_type + '.log'
-    get_log(server_call, log_level=log_level, path=path)
+    get_log(server_call, log_level=log_level, path=path, log_type=log_type)
