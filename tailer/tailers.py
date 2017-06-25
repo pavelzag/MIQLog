@@ -14,7 +14,6 @@ class SSHTailer(object):
     """
 
     def __init__(self, host, remote_filename, password, private_key=None, verbose=False):
-        password = 'smartvm'
         if '@' in host:
             self.username, self.host = tuple(host.split('@'))
         else:

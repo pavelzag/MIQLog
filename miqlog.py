@@ -6,7 +6,7 @@ from tailer import SSHTailer
 from termcolor import colored
 from time import sleep
 username = 'root'
-password = 'qum5net'
+password = 'smartvm'
 random_string = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(4))
 
 
