@@ -6,13 +6,15 @@ from tailer import SSHTailer
 from termcolor import colored
 from time import sleep
 username = 'root'
-password = ''
+password = 'qum5net'
 random_string = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(4))
 
 
-def get_log(server_parameter, log_level='INFO', path='NONE', log_type='None'):
-    logfile = open(log_type + "__" + 'log' + "__" + random_string + '.txt', 'w')
-    tailer = SSHTailer(server_parameter, path, verbose=True)
+def get_log(server_parameter, password, log_level='INFO', path='NONE', log_type='None', log_write= False):
+    tailer = SSHTailer(server_parameter, path, password, verbose=True)
+    if log_write:
+        logfile = open(log_type + "__" + 'log' + "__" + random_string + '.txt', 'w')
+        print('Printing local log at: ' + str(logfile.name))
     try:
         while 1:
             for line in tailer.tail():
@@ -22,7 +24,8 @@ def get_log(server_parameter, log_level='INFO', path='NONE', log_type='None'):
                     print (colored(line, 'green'))
                 elif 'ERROR' in line and 'ERROR' in log_level:
                     print (colored(line, 'red'))
-                logfile.write("%s\n" % line)
+                if log_write:
+                    logfile.write("%s\n" % line)
             sleep(0.2)
     except KeyboardInterrupt:
         tailer.disconnect()
@@ -55,9 +58,14 @@ if __name__ == "__main__":
     log_type_abbr = str(raw_input('Select log type (evm = \'evm\', '
                              'aut = \'automation\', pol = \'policy\', '
                              'api = \'api\', prod = \'production\'): '))
+    write_to_log = str(raw_input('Do you want to write to a local log file?: (Y/N) '))
     if not log_level:
         log_level = 'ALL'
+    if write_to_log == 'Y' or len(write_to_log) > 1:
+        log_write = True
+    else:
+        log_write = False
     log_type = log_typer(log_type_abbr)
     server_call = username + '@' + server_address
     path = '/var/www/miq/vmdb/log/' + log_type + '.log'
-    get_log(server_call, log_level=log_level, path=path, log_type=log_type)
+    get_log(server_call, password, log_level=log_level, path=path, log_type=log_type, log_write=log_write)

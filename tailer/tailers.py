@@ -13,7 +13,7 @@ class SSHTailer(object):
     Class to handle the tailing of a single file via SSH.
     """
 
-    def __init__(self, host, remote_filename, private_key=None, verbose=False):
+    def __init__(self, host, remote_filename, password, private_key=None, verbose=False):
         password = 'smartvm'
         if '@' in host:
             self.username, self.host = tuple(host.split('@'))
