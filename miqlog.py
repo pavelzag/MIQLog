@@ -19,7 +19,12 @@ def get_log(server_parameter, password, log_level='INFO', path='NONE', log_type=
         while 1:
             for line in tailer.tail():
                 if log_level == 'ALL':
-                    print(line)
+                    if 'INFO' in line:
+                        print (colored(line, 'green'))
+                    elif 'ERROR' or 'FATAL' in line:
+                        print (colored(line, 'red'))
+                    elif 'WARN' in line:
+                        print (colored(line, 'yellow'))
                 elif 'INFO' in line and 'INFO' in log_level:
                     print (colored(line, 'green'))
                 elif 'ERROR' in line and 'ERROR' in log_level:
