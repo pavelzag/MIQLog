@@ -1,0 +1,5 @@
+creds:
+    sftp_user: none
+    sftp_pass: none
+    miq_user: root
+    miq_pass: smartvm
